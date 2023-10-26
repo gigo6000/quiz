@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 import Progress from './components/Progress';
 import Question from './components/Question';
 import Answers from './components/Answers';
@@ -11,7 +11,7 @@ import {
     SET_ERROR,
     SET_SHOW_RESULTS,
     RESET_QUIZ,
-} from './reducers/types.js';
+} from './reducers/types';
 import quizReducer from './reducers/QuizReducer';
 
 import './App.css';
@@ -59,7 +59,7 @@ function App() {
     };
 
     const [state, dispatch] = useReducer(quizReducer, initialState);
-    const {currentQuestion, currentAnswer, answers, showResults, error} = state;
+    const { currentQuestion, currentAnswer, answers, showResults, error } = state;
 
     const question = questions[currentQuestion];
 
@@ -71,7 +71,7 @@ function App() {
         return <div className="error">{error}</div>;
     };
 
-    const renderResultMark = (question, answer) => {
+    const renderResultMark = (question: any, answer: any) => {
         if (question.correct_answer === answer.answer) {
             return <span className="correct">Correct</span>;
         }
@@ -80,9 +80,9 @@ function App() {
     };
 
     const renderResultsData = () => {
-        return answers.map(answer => {
+        return answers.map((answer: any) => {
             const question = questions.find(
-                question => question.id === answer.questionId
+                (question) => question.id === answer.questionId
             );
 
             return (
@@ -94,20 +94,20 @@ function App() {
     };
 
     const restart = () => {
-        dispatch({type: RESET_QUIZ});
+        dispatch({ type: RESET_QUIZ });
     };
 
     const next = () => {
-        const answer = {questionId: question.id, answer: currentAnswer};
+        const answer = { questionId: question.id, answer: currentAnswer };
 
         if (!currentAnswer) {
-            dispatch({type: SET_ERROR, error: 'Please select an option'});
+            dispatch({ type: SET_ERROR, error: 'Please select an option' });
             return;
         }
 
         answers.push(answer);
-        dispatch({type: SET_ANSWERS, answers});
-        dispatch({type: SET_CURRENT_ANSWER, currentAnswer: ''});
+        dispatch({ type: SET_ANSWERS, answers });
+        dispatch({ type: SET_CURRENT_ANSWER, currentAnswer: '' });
 
         if (currentQuestion + 1 < questions.length) {
             dispatch({
@@ -117,7 +117,7 @@ function App() {
             return;
         }
 
-        dispatch({type: SET_SHOW_RESULTS, showResults: true});
+        dispatch({ type: SET_SHOW_RESULTS, showResults: true });
     };
 
     if (showResults) {
@@ -132,7 +132,7 @@ function App() {
         );
     } else {
         return (
-            <QuizContext.Provider value={{state, dispatch}}>
+            <QuizContext.Provider value={{ state, dispatch }}>
                 <div className="container">
                     <Progress
                         total={questions.length}
