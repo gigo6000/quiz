@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import Answer from './Answer';
 import QuizContext from '../context/QuizContext';
 
 function Answers() {
-    const {state, dispatch} = useContext(QuizContext);
-    const {currentAnswer, currentQuestion, questions} = state;
+    const { state, dispatch } = useContext(QuizContext);
+    const { currentAnswer, currentQuestion, questions } = state;
     const question = questions[currentQuestion];
 
     return (

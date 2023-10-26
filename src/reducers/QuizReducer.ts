@@ -5,9 +5,33 @@ import {
     SET_ERROR,
     SET_SHOW_RESULTS,
     RESET_QUIZ,
-} from './types.js';
+} from './types';
 
-function quizReducer(state, action) {
+interface QuizState {
+    currentAnswer: string;
+    currentQuestion: number;
+    error: string;
+    showResults: boolean;
+    answers: string[];
+}
+
+type QuizAction =
+    | { type: typeof SET_CURRENT_ANSWER; currentAnswer: string }
+    | { type: typeof SET_CURRENT_QUESTION; currentQuestion: number }
+    | { type: typeof SET_ERROR; error: string }
+    | { type: typeof SET_SHOW_RESULTS; showResults: boolean }
+    | { type: typeof SET_ANSWERS; answers: string[] }
+    | { type: typeof RESET_QUIZ };
+
+const initialState: QuizState = {
+    currentAnswer: '',
+    currentQuestion: 0,
+    error: '',
+    showResults: false,
+    answers: [],
+};
+
+function quizReducer(state: QuizState = initialState, action: QuizAction): QuizState {
     switch (action.type) {
         case SET_CURRENT_ANSWER:
             return {
