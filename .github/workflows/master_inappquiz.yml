@@ -59,4 +59,4 @@ jobs:
           app-name: 'inappquiz'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FBC5C1658F5040AE893151ABA40E9442 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7DD66728C06A4FBE8F35A650B033A574 }}
